@@ -17,22 +17,18 @@ class PostsManage extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             List<Post> data = snapshot.data;
-            return _jobsListView(data);
+            return ListView.builder(
+                itemCount: data.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    title: Text(data[index].title),
+                  );
+                });
           } else if (snapshot.hasError) {
             return Text("${snapshot.error}");
           }
         },
       ),
     );
-  }
-
-  Widget _jobsListView(List<Post> data) {
-    return ListView.builder(
-        itemCount: data.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-            title: Text(data[index].title),
-          );
-        });
   }
 }
